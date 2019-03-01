@@ -28,7 +28,7 @@ class ListsController < ApplicationController
 
   def destroy
     @board.lists.delete_list(@list.id)
-    redirect_to board_lists_path
+    redirect_to board_lists_path(@board)
   end
 
   private

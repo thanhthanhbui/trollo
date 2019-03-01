@@ -1,0 +1,19 @@
+<%= form_with(model: [@list, @task], local: true, class: "ui form") do |f| %>
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title, class: "input" %>
+  </div>
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_field :description, class: "input" %>
+  </div>
+  <div class="field">
+    <%= f.label :label %>
+    <%= f.text_field :label, class: "input" %>
+  </div>
+  <div class="field">
+    <%= f.label :due_date %>
+    <%= f.date_field :due_date, class: "input" %>
+  </div>
+  <%= f.submit nil, class: "ui blue button" %>
+<% end %>
