@@ -1,0 +1,7 @@
+<h1>Boards</h1>
+
+<% @boards.each do |board| %>
+  <div>
+    <h3><%= link_to board.title, board %></h3>
+  </div>
+<% end %>
