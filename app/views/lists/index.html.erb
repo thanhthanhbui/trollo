@@ -1,4 +1,6 @@
-<h1>Lists</h1>
+<h1><%= @board.title %> Lists</h1>
+<%= link_to 'Add List', new_board_list_path(@board) %>
+<hr />
 
 <% @lists.each do |list| %>
   <div>
