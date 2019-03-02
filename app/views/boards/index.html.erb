@@ -3,5 +3,7 @@
 <% @boards.each do |board| %>
   <div>
     <h3><%= link_to board.title, board %></h3>
+    <h4>Description: </h4>
+      <%= board.description %>
   </div>
 <% end %>

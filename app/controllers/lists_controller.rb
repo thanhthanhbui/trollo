@@ -3,7 +3,7 @@ class ListsController < ApplicationController
   before_action :set_list, only: [:show, :edit, :update, :destroy]
 
   def index
-    @lists = @board.lists.all_lists(@board.id)
+    redirect_to board_path(@board)
   end
 
   def show
@@ -23,7 +23,7 @@ class ListsController < ApplicationController
 
   def update
     @board.lists.update_list(list_params, @list.id)
-    redirect_to board_lists_path(@board)
+    redirect_to board_list_path(@board)
   end
 
   def destroy
@@ -33,7 +33,11 @@ class ListsController < ApplicationController
 
   private
     def set_board
-      @board = Board.find(params[:board_id])
+      if params[:board_id] != nil
+        @board = Board.single_board(current_user.id, params[:board_id])
+      elsif params[:board_id] == nil
+        @board = Board.single_board(current_user.id, @list.board_id)
+      end
     end
 
     def set_list

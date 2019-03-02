@@ -1,6 +1,6 @@
 class Board < ApplicationRecord
   belongs_to :user
-  has_many :lists
+  has_many :lists, dependent: :destroy
 
   def self.all_boards(id)
     Board.find_by_sql(
@@ -15,8 +15,8 @@ class Board < ApplicationRecord
     Board.find_by_sql([
       "SELECT *
       FROM boards b
-      WHERE b.id = ?",
-      board_id]).first
+      WHERE b.id = ? AND b.user_id = ?",
+      board_id, user_id]).first
   end
 
   def self.create_board(p, board_id)

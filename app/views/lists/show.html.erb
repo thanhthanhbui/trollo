@@ -1,8 +1,27 @@
-<h1><%= link_to @list.title, list_tasks_path(@list) %></h1>
+<h1><%= @list.title %></h1>
+<%= link_to 'Add Task', new_list_task_path(@list) %>
+<div class="ui divider"></div>
 
+<% @list.tasks.each do |task| %>
+  <div>
+    <h2><%= link_to task.title, [@list, task] %></h2>
+  </div>
+  <h4>
+    <a class="ui teal tag label"><%= task.label %></a>
+  </h4>
+  <h4>Due date: </h4>
+    <p><%= task.due_date %></p>
+  <h4>Description: </h4>
+    <p><%= task.description %></p>
+<% end %>
+
+<hr />
 <%= link_to edit_board_list_path(@board) do %>
-  <i class="ui pencil blue icon large"></i> | 
+  <i class="ui edit blue icon large"></i> | 
 <% end %>
 <%= link_to [@board, @list], method: :delete do %>
   <i class="ui trash red icon large"></i>
 <% end %>
+<br />
+<br />
+<%= link_to 'Back', board_lists_path(@board) %>

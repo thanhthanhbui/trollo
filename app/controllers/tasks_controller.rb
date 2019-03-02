@@ -3,7 +3,7 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tasks = @list.tasks.all_tasks(@list.id)
+    redirect_to board_list_path(@list.board_id, @list)
   end
 
   def show
@@ -23,7 +23,7 @@ class TasksController < ApplicationController
 
   def update
     @list.tasks.update_task(task_params, @task.id)
-    redirect_to list_tasks_path(@list)
+    redirect_to list_task_path(@list)
   end
 
   def destroy

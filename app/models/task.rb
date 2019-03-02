@@ -1,20 +1,11 @@
 class Task < ApplicationRecord
-  belongs_to :list, dependent: :destroy
-
-  def self.all_tasks(id)
-    Task.find_by_sql(
-      "SELECT *
-      FROM tasks l
-      WHERE l.list_id = #{id}
-      ORDER BY l.title"
-    )
-  end
+  belongs_to :list
 
   def self.single_task(list_id, task_id)
     Task.find_by_sql([
       "SELECT *
-      FROM tasks l
-      WHERE l.id = ?",
+      FROM tasks t
+      WHERE t.id = ?",
       task_id]).first
   end
 
@@ -36,7 +27,7 @@ class Task < ApplicationRecord
   def self.update_task(p, task_id)
     Task.find_by_sql([
       "UPDATE tasks l
-      SET title = ?, description = ?, updated_at = ?
+      SET title = ?, description = ?, label = ?, due_date = ?, updated_at = ?
       WHERE l.id = ?",
       p[:title], p[:description], p[:label], p[:due_date], DateTime.now, task_id])
   end

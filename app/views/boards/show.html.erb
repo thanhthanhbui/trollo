@@ -1,9 +1,23 @@
-<h1><%= link_to @board.title, board_lists_path(@board) %></h1>
+<h1><%= @board.title %></h1>
+<%= link_to 'Add List', new_board_list_path(@board) %>
 <div class="ui divider"></div>
 
+
+<% @board.lists.each do |list| %>
+  <div>
+    <h3><%= link_to list.title, [@board, list] %></h3>
+  </div>
+  <h4>Description: </h4>
+    <p><%= list.description %></p>
+<% end %>
+<hr />
+<br />
 <%= link_to edit_board_path(@board) do %>
-  <i class="ui pencil blue icon large"></i> | 
+  <i class="ui edit blue icon large"></i> | 
 <% end %>
 <%= link_to @board, method: :delete do %>
   <i class="ui trash red icon large"></i>
 <% end %>
+<br />
+<br />
+<%= link_to 'Back', boards_path %>

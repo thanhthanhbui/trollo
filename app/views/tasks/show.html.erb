@@ -1,8 +1,2 @@
 <h1><%= @task.title %></h1>
-
-<%= link_to edit_list_task_path(@list) do %>
-  <i class="ui pencil blue icon large"></i> | 
-<% end %>
-<%= link_to [@list, @task], method: :delete do %>
-  <i class="ui trash red icon large"></i>
-<% end %>
+<%= link_to 'Back', list_tasks_path(@list) %>
